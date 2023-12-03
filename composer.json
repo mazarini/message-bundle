@@ -1,0 +1,75 @@
+{
+    "name": "mazarini/message-bundle",
+    "description": "Display alerts on webpage.",
+    "type": "symfony-bundle",
+    "minimum-stability": "stable",
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "docker": false
+        },
+        "public-dir": "tests/public"
+    },
+    "require": {
+        "php": ">=8.1",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "symfony/console": "^6.4|^7.0",
+        "symfony/framework-bundle": "^6.4|^7.0",
+        "symfony/runtime": "^6.4|^7.0",
+        "symfony/twig-bundle": "^6.4|^7.0",
+        "twig/extra-bundle": "^3.0",
+        "twig/twig": "^3.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan-symfony": "*",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "^6.4|^7.0",
+        "symfony/css-selector": "^6.4|^7.0",
+        "symfony/dotenv": "^6.4|^7.0",
+        "symfony/flex": "^2.4",
+        "symfony/maker-bundle": "^1.52",
+        "symfony/phpunit-bridge": "^6.3",
+        "symfony/yaml": "^6.4|^7.0",
+        "symplify/config-transformer": "^12.1"
+    },
+    "license": "GPL-3.0-or-later",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Mazarini\\MessageBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mazarini\\MessageBundle\\Tests\\": "tests/tests",
+            "App\\": "tests/src/"
+        }
+    },
+    "replace": {},
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Mazarini",
+            "email": "mazarini@protonmail.com"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "sort-packages": true
+    }
+}
