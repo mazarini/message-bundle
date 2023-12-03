@@ -1,13 +1,7 @@
 ###> local ###
-#phpunit.xml.dist
-/public/build/*
-!public/build/entrypoints.json
-!public/build/manifest.json
-/public/index.php
+/public
 /src/Controller/.gitignore
 /src/Kernel.php
-/symfony.lock
-/tests/bootstrap.php
 /var/*
 ###< local ###
 
