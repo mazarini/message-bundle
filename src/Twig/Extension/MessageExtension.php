@@ -37,6 +37,7 @@ class MessageExtension extends AbstractExtension
     {
         return [
             new TwigFunction('alert_class', [MessageRuntime::class, 'alertClass']),
+            new TwigFunction('isClosable', [MessageRuntime::class, 'isClosable']),
         ];
     }
 }

@@ -26,15 +26,14 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-class MazariniMessageBundle extends AbstractBundle
-{
+
+class MazariniMessageBundle extends AbstractBundle {
     /**
      * loadExtension.
      *
      * @param array<mixed> $config
      */
-    public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void
-    {
+    public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void {
         $services = $containerConfigurator->services();
         //        $services->defaults()
         //            ->autowire()
@@ -46,21 +45,24 @@ class MazariniMessageBundle extends AbstractBundle
                 __DIR__.'/Entity/',
                 __DIR__.'/Kernel.php',
             ]);
+        $services->set(self::class)
+            ->public();
         $services->set(MessageExtension::class)
             ->tag('twig.extension')
             ->public();
         $services->set(MessageRuntime::class)
             ->tag('twig.runtime')
             ->public()
+            ->arg('$closable', $config['closable'])
             ->arg('$types', $config['types'])
             ->arg('$default', $config['default']);
     }
 
-    public function configure(DefinitionConfigurator $definition): void
-    {
+    public function configure(DefinitionConfigurator $definition): void {
         // if the configuration is short, consider adding it in this class
         $definition->rootNode()
             ->children()
+            ->booleanNode('closable')->defaultValue(true)->end()
             ->scalarNode('default')->defaultValue('alert-danger')->end()
             ->arrayNode('types')
             ->useAttributeAsKey('name')
@@ -82,8 +84,7 @@ class MazariniMessageBundle extends AbstractBundle
         ;
     }
 
-    public function getPath(): string
-    {
+    public function getPath(): string {
         return \dirname(__DIR__);
     }
 }
