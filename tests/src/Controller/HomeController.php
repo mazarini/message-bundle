@@ -38,7 +38,7 @@ class HomeController extends AbstractController
             $this->addFlash($type1, 'Message 1');
         }
         if ('' !== $type2) {
-            $this->addFlash($type2, 'Message 2');
+            parent::addFlash($type2, 'Message 2');
         }
 
         return $this->render('base.html.twig');
