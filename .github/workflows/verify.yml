@@ -46,8 +46,8 @@ jobs:
         run: |
           composer config extra.symfony.require ${{ matrix.sf-version }}
           composer update --no-ansi --no-interaction --no-scripts --no-progress -v
-          bin/console about
+          php bin/console about
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        run: vendor/bin/phpunit
+        run: php vendor/bin/phpunit
       - name: Execute phpstan
-        run: vendor/bin/phpstan
+        run: php vendor/bin/phpstan
