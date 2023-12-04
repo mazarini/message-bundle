@@ -46,8 +46,13 @@ jobs:
         run: |
           composer config extra.symfony.require ${{ matrix.sf-version }}
           composer update --no-ansi --no-interaction --no-scripts --no-progress -v
+          composer global require phpstan/phpstan-symfony
+          composer global require friendsofphp/php-cs-fixer
+          composer -n config --global home
           php bin/console about
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: php vendor/bin/phpunit
       - name: Execute phpstan
-        run: php vendor/bin/phpstan
+        run: php ~/.config/composer/vendor/bin/phpstan
+      - name: Execute php-cs-fixer
+        run: php ~/.config/composer/vendor/bin/php-cs-fixer fix

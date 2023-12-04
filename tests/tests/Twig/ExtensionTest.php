@@ -19,11 +19,14 @@
 
 namespace App\Tests\Twig;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Mazarini\MessageBundle\Twig\Runtime\MessageRuntime;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ExtensionTest extends WebTestCase {
-    public function testNoMessage(): void {
+class ExtensionTest extends WebTestCase
+{
+    public function testNoMessage(): void
+    {
         $client = static::createClient();
         $crawler = $client->request('GET', '');
 
@@ -36,18 +39,26 @@ class ExtensionTest extends WebTestCase {
         $this->assertcount(0, $crawler->filter('div.alert'));
     }
 
-    public function testClosableMessage(): void {
+    public function testClosableMessage(): void
+    {
         $client = static::createClient();
         $this->testClosableOrNot($client, 3);
     }
-    public function testNotClosableMessage(): void {
+
+    public function testNotClosableMessage(): void
+    {
         $client = static::createClient();
-        $container = static::getContainer();
-        $container->get(MessageRuntime::class)->setClosable(false);
-        $this->testClosableOrNot($client, 0);
+        $service = static::getContainer()->get(MessageRuntime::class);
+        if (is_a($service, MessageRuntime::class)) {
+            $service->setClosable(false);
+        }
+        if (is_a($client, KernelBrowser::class)) {
+            $this->testClosableOrNot($client, 0);
+        }
     }
 
-    protected function testClosableOrNot($client, int $number): void {
+    protected function testClosableOrNot(KernelBrowser $client, int $number): void
+    {
         $crawler = $client->request('GET', '/error/warnig/info');
 
         // Test page OK with div alert-group
@@ -63,7 +74,8 @@ class ExtensionTest extends WebTestCase {
     /**
      * @dataProvider ErrorProvider
      */
-    public function testAllMessage(string $error, string $alert = null): void {
+    public function testAllMessage(string $error, string $alert = null): void
+    {
         $alert = (null === $alert) ? 'div.alert-'.$error : $alert;
 
         $client = static::createClient();
@@ -85,7 +97,8 @@ class ExtensionTest extends WebTestCase {
      *
      * @return \Traversable<array<string>>
      */
-    public function ErrorProvider(): \Traversable {
+    public function ErrorProvider(): \Traversable
+    {
         yield ['default', 'div.alert-danger'];
         yield ['primary'];
         yield ['secondary'];

@@ -22,8 +22,10 @@ namespace App\Tests\Twig;
 use Mazarini\MessageBundle\Twig\Runtime\MessageRuntime;
 use PHPUnit\Framework\TestCase;
 
-class RuntimeTest extends TestCase {
-    public function testMessageRuntime(): void {
+class RuntimeTest extends TestCase
+{
+    public function testMessageRuntime(): void
+    {
         $message = new MessageRuntime(true, ['type' => 'class-type'], 'default-class');
         $this->assertSame($message->alertClass('type'), 'class-type');
         $this->assertSame($message->alertClass('x'), 'default-class');

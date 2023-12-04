@@ -26,14 +26,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-
-class MazariniMessageBundle extends AbstractBundle {
+class MazariniMessageBundle extends AbstractBundle
+{
     /**
      * loadExtension.
      *
      * @param array<mixed> $config
      */
-    public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void {
+    public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void
+    {
         $services = $containerConfigurator->services();
         //        $services->defaults()
         //            ->autowire()
@@ -58,7 +59,8 @@ class MazariniMessageBundle extends AbstractBundle {
             ->arg('$default', $config['default']);
     }
 
-    public function configure(DefinitionConfigurator $definition): void {
+    public function configure(DefinitionConfigurator $definition): void
+    {
         // if the configuration is short, consider adding it in this class
         $definition->rootNode()
             ->children()
@@ -84,7 +86,8 @@ class MazariniMessageBundle extends AbstractBundle {
         ;
     }
 
-    public function getPath(): string {
+    public function getPath(): string
+    {
         return \dirname(__DIR__);
     }
 }

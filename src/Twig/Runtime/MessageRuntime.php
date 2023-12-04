@@ -21,7 +21,8 @@ namespace Mazarini\MessageBundle\Twig\Runtime;
 
 use Twig\Extension\RuntimeExtensionInterface;
 
-class MessageRuntime implements RuntimeExtensionInterface {
+class MessageRuntime implements RuntimeExtensionInterface
+{
     private bool $closable;
     private string $default;
     /**
@@ -36,7 +37,8 @@ class MessageRuntime implements RuntimeExtensionInterface {
      *
      * @return void
      */
-    public function __construct(bool $closable, array $types, string $default) {
+    public function __construct(bool $closable, array $types, string $default)
+    {
         $this->closable = $closable;
         $this->types = $types;
         $this->default = $default;
@@ -45,14 +47,16 @@ class MessageRuntime implements RuntimeExtensionInterface {
     /**
      * alertClass.
      */
-    public function alertClass(string $type): string {
+    public function alertClass(string $type): string
+    {
         return $this->types[$type] ?? $this->default;
     }
 
     /**
      * setDefault.
      */
-    public function setDefault(string $default): self {
+    public function setDefault(string $default): self
+    {
         $this->default = $default;
 
         return $this;
@@ -60,14 +64,16 @@ class MessageRuntime implements RuntimeExtensionInterface {
 
     /**
      * setClosable.
-     *
      */
-    public function setClosable(bool $closable): self {
+    public function setClosable(bool $closable): self
+    {
         $this->closable = $closable;
 
         return $this;
     }
-    public function isClosable(): bool {
+
+    public function isClosable(): bool
+    {
         return $this->closable;
     }
 }
