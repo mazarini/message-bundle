@@ -53,6 +53,6 @@ jobs:
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: php vendor/bin/phpunit
       - name: Execute phpstan
-        run: php ~/.config/composer/vendor/bin/phpstan
+        run: php ~/.composer/vendor/bin/phpstan
       - name: Execute php-cs-fixer
-        run: php ~/.config/composer/vendor/bin/php-cs-fixer fix
+        run: php ~/.composer/vendor/bin/php-cs-fixer fix
