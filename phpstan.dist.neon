@@ -1,5 +1,5 @@
 includes:
-    - .ide/phpstan/baseline.neon
+    - .github/phpstan/baseline.neon
 
 parameters:
     level: 9

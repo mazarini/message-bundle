@@ -2,7 +2,7 @@
 	"folders": [
 		{
 			"name": "message-bundle",
-			"path": "../"
+			"path": "../../"
 		},
 	],
 	"settings": {
