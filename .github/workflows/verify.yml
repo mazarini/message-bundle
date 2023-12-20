@@ -49,10 +49,9 @@ jobs:
           composer update --no-ansi --no-interaction --no-scripts --no-progress
           composer global require phpstan/phpstan-symfony
           composer global require friendsofphp/php-cs-fixer
-          php bin/console about
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        run: php vendor/bin/phpunit
+        run: make cover-text
       - name: Execute phpstan
-        run: php ~/.composer/vendor/bin/phpstan
+        run: make phpstan
       - name: Execute php-cs-fixer
-        run: php ~/.composer/vendor/bin/php-cs-fixer fix
+        run: make phpcs

@@ -1,10 +1,10 @@
 <div class="alert-group">
-	{% for type,messages in app.flashes %}
+	{% for type, messages in app.flashes %}
 		{% for message in messages %}
 			{% if type == 'msg' %}
-				{% include "@MazariniMessage/_alert.html.twig" with { 'type': message.type, 'message': message.text } only %}
+				{% include '@MazariniMessage/_alert.html.twig' with {'type': message.type, 'message': message.text} only %}
 			{% else %}
-				{% include "@MazariniMessage/_alert.html.twig" with { 'type': type, 'message': message } only %}
+				{% include '@MazariniMessage/_alert.html.twig' with {'type': type, 'message': message} only %}
 			{% endif %}
 		{% endfor %}
 	{% endfor %}
