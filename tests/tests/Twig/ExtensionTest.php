@@ -42,7 +42,7 @@ class ExtensionTest extends WebTestCase
     public function testClosableMessage(): void
     {
         $client = static::createClient();
-        $this->testClosableOrNot($client, 3);
+        $this->testClosableOrNot($client, 4);
     }
 
     public function testNotClosableMessage(): void
@@ -76,10 +76,10 @@ class ExtensionTest extends WebTestCase
      */
     public function testAllMessage(string $error, string $alert = null): void
     {
-        $alert = (null === $alert) ? 'div.alert-'.$error : $alert;
+        $alert = (null === $alert) ? 'div.alert-' . $error : $alert;
 
         $client = static::createClient();
-        $crawler = $client->request('GET', '/'.$error);
+        $crawler = $client->request('GET', '/' . $error);
 
         // Test page OK with div alert-group
         $this->assertResponseIsSuccessful();

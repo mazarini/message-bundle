@@ -53,16 +53,6 @@ class MessageRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * setDefault.
-     */
-    public function setDefault(string $default): self
-    {
-        $this->default = $default;
-
-        return $this;
-    }
-
-    /**
      * setClosable.
      */
     public function setClosable(bool $closable): self

@@ -40,6 +40,9 @@ class HomeController extends AbstractController
         if ('' !== $type2) {
             parent::addFlash($type2, 'Message 2');
         }
+        if ($this->hasError()) {
+            $this->addFlash('info', 'There is an error message');
+        }
 
         return $this->render('base.html.twig');
     }

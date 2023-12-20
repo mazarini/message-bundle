@@ -21,8 +21,18 @@ namespace Mazarini\MessageBundle\Controller;
 
 trait MessageControllerTrait
 {
+    private int $errorCount = 0;
+
     protected function addFlash(string $type, mixed $message): void
     {
+        if ('error' === $type) {
+            ++$this->errorCount;
+        }
         parent::addFlash('msg', ['type' => $type, 'text' => $message]);
+    }
+
+    protected function hasError(): bool
+    {
+        return $this->errorCount > 0;
     }
 }
