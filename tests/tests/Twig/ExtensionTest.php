@@ -19,6 +19,7 @@
 
 namespace App\Tests\Twig;
 
+use Mazarini\MessageBundle\Config\Config;
 use Mazarini\MessageBundle\Twig\Runtime\MessageRuntime;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -50,7 +51,7 @@ class ExtensionTest extends WebTestCase
         $client = static::createClient();
         $service = static::getContainer()->get(MessageRuntime::class);
         if (is_a($service, MessageRuntime::class)) {
-            $service->setClosable(false);
+            $this->setClosable(false);
         }
         if (is_a($client, KernelBrowser::class)) {
             $this->testClosableOrNot($client, 0);
@@ -76,10 +77,10 @@ class ExtensionTest extends WebTestCase
      */
     public function testAllMessage(string $error, string $alert = null): void
     {
-        $alert = (null === $alert) ? 'div.alert-' . $error : $alert;
+        $alert = (null === $alert) ? 'div.alert-'.$error : $alert;
 
         $client = static::createClient();
-        $crawler = $client->request('GET', '/' . $error);
+        $crawler = $client->request('GET', '/'.$error);
 
         // Test page OK with div alert-group
         $this->assertResponseIsSuccessful();
@@ -109,5 +110,17 @@ class ExtensionTest extends WebTestCase
         yield ['info'];
         yield ['light'];
         yield ['dark'];
+    }
+
+    private function setClosable(bool $closable): void
+    {
+        $config = static::getContainer()->get(Config::class);
+        if (is_a($config, Config::class)) {
+            $reflectionClass = new \ReflectionClass(Config::class);
+            $property = $reflectionClass->getProperty('configData');
+            $configData = $config->getData();
+            $configData['closable'] = $closable;
+            $property->setValue($config, $configData);
+        }
     }
 }

@@ -4,3 +4,17 @@ parameters:
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
 			count: 1
 			path: ../../src/MazariniMessageBundle.php
+		-
+			message: "#^Method Mazarini\\\\MessageBundle\\\\Config\\\\Config\\:\\:getTypes\\(\\) should return array\\<string, string\\> but returns array\\.$#"
+			count: 1
+			path: ../../src/Config/Config.php
+
+		-
+			message: "#^Call to an undefined method Mazarini\\\\Config\\\\Config\\\\ConfigInterface\\:\\:getArray\\(\\)\\.$#"
+			count: 1
+			path: ../../src/MazariniMessageBundle.php
+
+		-
+			message: "#^Call to an undefined method Mazarini\\\\Config\\\\Config\\\\ConfigInterface\\:\\:getArray\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Twig/Runtime/MessageRuntime.php

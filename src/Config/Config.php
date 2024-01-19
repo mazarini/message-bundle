@@ -17,40 +17,21 @@
  * You should have received a copy of the GNU General Public License
  */
 
-namespace Mazarini\MessageBundle\Twig\Runtime;
+namespace Mazarini\MessageBundle\Config;
 
-use Mazarini\Config\Config\ConfigInterface;
-use Mazarini\MessageBundle\Config\Config;
-use Mazarini\MessageBundle\Config\ConfigTrait;
-use Twig\Extension\RuntimeExtensionInterface;
+use Mazarini\Config\Config\Config as Base;
 
-class MessageRuntime implements RuntimeExtensionInterface
+class Config extends Base
 {
     use ConfigTrait;
-
-    /**
-     * __construct.
-     */
-    public function __construct(
-        private Config $config
-    ) {
-    }
-
-    /**
-     * alertClass.
-     */
-    public function alertClass(string $type): string
-    {
-        return $this->getTypes()[$type] ?? $this->getDefault();
-    }
-
-    public function isClosable(): bool
-    {
-        return $this->getClosable();
-    }
-
-    private function getConfig(): ConfigInterface
-    {
-        return $this->config;
-    }
+    protected array $configData = [
+        'closable' => true,
+        'default' => 'alert-danger',
+        'types' => [
+            'success' => 'alert-success',
+            'error' => 'alert-danger',
+            'warning' => 'alert-warning',
+            'info' => 'alert-info',
+        ],
+    ];
 }

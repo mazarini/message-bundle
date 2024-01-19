@@ -19,44 +19,31 @@
 
 namespace Mazarini\MessageBundle;
 
+use Mazarini\Config\Config\ConfigInterface;
+use Mazarini\Config\MazariniConfigBundle;
+use Mazarini\MessageBundle\Config\Config;
+use Mazarini\MessageBundle\Config\ConfigTrait;
 use Mazarini\MessageBundle\Twig\Extension\MessageExtension;
 use Mazarini\MessageBundle\Twig\Runtime\MessageRuntime;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 
-class MazariniMessageBundle extends AbstractBundle
+class MazariniMessageBundle extends MazariniConfigBundle
 {
-    /**
-     * loadExtension.
-     *
-     * @param array<mixed> $config
-     */
-    public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void
+    use ConfigTrait;
+
+    protected function loadServices(ServicesConfigurator $services): void
     {
-        $services = $containerConfigurator->services();
-        //        $services->defaults()
-        //            ->autowire()
-        //            ->autoconfigure();
-        $services->load('Mazarini\MessageBundle\\', __DIR__.'')
-            ->exclude([
-                __DIR__.'/Controller/',
-                __DIR__.'/DependencyInjection/',
-                __DIR__.'/Entity/',
-                __DIR__.'/Kernel.php',
-            ]);
-        $services->set(self::class)
-            ->public();
+        //        $services->set(self::class)
+        //            ->public();
         $services->set(MessageExtension::class)
             ->tag('twig.extension')
-            ->public();
+            ->public()
+        ;
         $services->set(MessageRuntime::class)
             ->tag('twig.runtime')
             ->public()
-            ->arg('$closable', $config['closable'])
-            ->arg('$types', $config['types'])
-            ->arg('$default', $config['default']);
+        ;
     }
 
     public function configure(DefinitionConfigurator $definition): void
@@ -89,5 +76,10 @@ class MazariniMessageBundle extends AbstractBundle
     public function getPath(): string
     {
         return \dirname(__DIR__);
+    }
+
+    protected function CreateConfig(array $configArray): ConfigInterface
+    {
+        return new Config($configArray);
     }
 }
